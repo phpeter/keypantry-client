@@ -1,3 +1,4 @@
+/*
 Users:
 	-id: serial
 	-username: character varying(55)
@@ -9,17 +10,20 @@ Items:
 	-userId: int
 	-key: int
 	-own: boolean
+*/
 
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
 	id SERIAL PRIMARY KEY,
 	username CHARACTER VARYING(55) NOT NULL,
 	passwordHash CHARACTER VARYING(255) NOT NULL
-)
+);
 
-CREATE TABLE items (
+CREATE TABLE IF NOT EXISTS items (
 	id SERIAL PRIMARY KEY,
 	name CHARACTER VARYING(55),
 	userId INT,
 	key INT,
 	isOwned BOOLEAN
-)
+);
+
+INSERT INTO users (username, passwordHash) VALUES ('tindell', '6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090');
