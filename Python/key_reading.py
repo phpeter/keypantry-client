@@ -1,19 +1,19 @@
-import requests, sys, tty
+import requests, readchar
 
-USER_ID = 'oop'
-USER_PASS = 'me hungry'
+USER_ID = 'tindell'
+USER_PASS = 'abc123'
 
 def on_key_press(key):
     apicall = 'https://keypantry.herokuapp.com/toggleitem/' + str(key)
     try:
-        r = requests.get(apicall, auth = (USER_ID, USER_PASS)) # , auth =  (USER_ID, USER_PASS)
+        r = requests.get(apicall, headers={"username":USER_ID, "password":USER_PASS}) # , auth =  (USER_ID, USER_PASS)
     except Exception as e:
         print(e)
     print(r)
+    print(r.text)
 
-tty.setcbreak(sys.stdin)
 try:
     while True:
-        on_key_press(ord(sys.stdin.read(1)))
+        on_key_press("".join(str(x) for x in [ord(c) for c in (readchar.readkey())]))
 except KeyboardInterrupt:
     exit()
